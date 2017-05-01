@@ -22,6 +22,7 @@ class App extends Component {
             active:null
         };
         this.hostname = window.location.hostname;
+       
         this.getNoticeFromApi();
     }
 
@@ -31,13 +32,13 @@ class App extends Component {
 
         if(notices[idx]){
             var notice = notices[idx];
-
+                notice.idx = idx;
             this.setState({
                 title: notice.Title,
                 content: notice.Content,
                 active: idx
             });
-
+            console.log('notice:', notice);
 
             dispatch( updateNotice(notice) );
         }
@@ -46,7 +47,9 @@ class App extends Component {
 
     getNoticeFromApi(){
         var self = this;
-
+        console.log('notice.idx', this.props.notice.idx);
+        var noticeIdx = this.props.notice.idx ? this.props.notice.idx : 0;
+        
         axios({
             method:'get',
             url: `http://${this.hostname}:8080/api/notices/0/7`,
@@ -60,12 +63,13 @@ class App extends Component {
                         notices: data
                     });
 
-                    self.renderNotice(0);
+                    self.renderNotice(noticeIdx);
                 }
             }
         });
 
     }
+    
 
     render(){
         let {notices, active} = this.state;
