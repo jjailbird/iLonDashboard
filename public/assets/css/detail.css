@@ -540,3 +540,6 @@
     color: #f45235;
     width: 212px;
 }
+.electricity_power .sub_data li span.b.time_of_peak_demand {
+    font-size: 18px;
+}

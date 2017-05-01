@@ -68,7 +68,6 @@ class App extends Component {
     }
 
     render(){
-
         let {notices, active} = this.state;
 
         return(

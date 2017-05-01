@@ -78,7 +78,7 @@ class App extends Component {
                         </li>
                         <li>
                             <span className="a">Time of Peak Demand</span>
-                            <span className="b">{power.time_of_peak_demand}</span>
+                            <span className="b time_of_peak_demand">{power.time_of_peak_demand}</span>
                         </li>
                     </ul>
                 </div>

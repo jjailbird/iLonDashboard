@@ -22,6 +22,86 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+function getZeroFillNumber(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
+    
+function getHexToBinArray(sHexStringrc) {
+    var sHexStrings = sHexStringrc.split('\t');
+    var sBinStrings = [];
+    for(let i=0;i<sHexStrings.length;i++) {
+        var sBin = getZeroFillNumber(parseInt(sHexStrings[i], 16).toString(2), 8);
+        sBinStrings.push(sBin);
+        // console.log(sHexStrings[i], sBin);
+    }
+    return sBinStrings;
+};
+    
+function getDateTimeFromBinary(sBinaryString) {
+    var dateTime = {};
+    var binArry = getHexToBinArray(sBinaryString);
+    var sTemp, sDump;
+    // word1------------------------------------------------------------------------------
+    sTemp = binArry[0] + binArry[1];
+    var yearBin = sTemp.slice(-7);
+    sTemp = sTemp.substr(0,sTemp.length-7);
+    dateTime.year = parseInt(yearBin, 2) + 2000;
+    
+    // word2-------------------------------------------------------------------------------
+    sTemp = binArry[2] + binArry[3];
+    var dayBin = sTemp.slice(-5);
+    sTemp = sTemp.substr(0, sTemp.length -5);
+    dateTime.day = parseInt(dayBin, 2);
+    
+    var weekBin = sTemp.slice(-3);
+    sTemp = sTemp.substr(0, sTemp.length -3);
+    dateTime.week = parseInt(weekBin, 2);
+    
+    var monthBin = sTemp.slice(-4);
+    sTemp = sTemp.substr(0, sTemp.length -4);
+    dateTime.month = parseInt(monthBin, 2);
+    
+    // word3---------------------------------------------------------------------------------
+    sTemp = binArry[4] + binArry[5];
+    
+    var minutesBin = sTemp.slice(-6);
+    sTemp = sTemp.substr(0, sTemp.length-6);
+    dateTime.minutes = parseInt(minutesBin, 2);
+    
+    sDump = sTemp.slice(-1);
+    sTemp = sTemp.substr(0, sTemp.length-1);
+
+    var timeSyncQBin = sTemp.slice(-1);
+    sTemp = sTemp.substr(0, sTemp.length-1);
+    dateTime.timeSyncQ = parseInt(timeSyncQBin, 2);
+
+    var hourBin= sTemp.slice(-5);
+    sTemp = sTemp.substr(0, sTemp.length-5);
+    dateTime.hour = parseInt(hourBin, 2);
+    
+    sDump = sTemp.slice(-2);
+    sTemp = sTemp.substr(0, sTemp.length-2);
+
+    var timeTypeBin = sTemp.slice(-1);
+    dateTime.timeType = parseInt(timeTypeBin, 2);
+
+    // word4----------------------------------------------------------------------------------
+    sTemp = binArry[6] + binArry[7];
+    var millisecondBin = sTemp.slice(-16);
+    var milliseconds = parseInt(millisecondBin, 2);
+    dateTime.seconds = (milliseconds/1000);
+    
+    return dateTime;
+}
+
+function getDateTimeStringFromBinary(sBinaryString) {
+    var dt = getDateTimeFromBinary(sBinaryString);
+    var dateString = dt.day.toString() + '/' + dt.month.toString() + '/' + dt.year.toString() + ' ' + dt.hour.toString() + ':' + dt.minutes.toString() + ':' + dt.seconds.toFixed(0);
+    return dateString;
+}
+
 var timer = null;
 class Root extends Component {
 
@@ -82,7 +162,7 @@ class Root extends Component {
 
             for(let data of jsonObj){
 
-                console.log(data);
+                // console.log(data);
                 switch (data.target) {
                     case "electricity.totalpower.1.int":
                         if( data.tagValue.indexOf("e") > -1 ){
@@ -149,7 +229,7 @@ class Root extends Component {
                             electricity.power.frequency = Math.round(data.tagValue * 100) / 100;
                         }
                         break;
-                    case "electricity.powerfactor.fixed(2)":
+                    case "electricity.powerfactor4.fixed(2)":
                         if( data.tagValue.indexOf("e") > -1 ){
                             electricity.power.power_fator_avg = parseInt(data.tagValue * 32767, 10);
                         }else{
@@ -165,12 +245,17 @@ class Root extends Component {
                         }
                         break;
                     case "electricity.timeofpeakdemend.int":
+                        /*
                         if( data.tagValue.indexOf("e") > -1 ){
                             electricity.power.time_of_peak_demand = parseInt(data.tagValue * 32767, 10);
                         }else{
                             electricity.power.time_of_peak_demand = Math.round(data.tagValue * 100) / 100;
                         }
-
+                        */
+                        if(typeof data.tagValue == 'string' && data.tagValue.length >= 20) {
+                           electricity.power.time_of_peak_demand = getDateTimeStringFromBinary(data.tagValue);
+                        }
+                       
                         dispatch( updateElectricity(electricity) );
                         break;
 
@@ -228,7 +313,7 @@ class Root extends Component {
                 idx: idx
             })
 
-        }, 2000);
+        }, 1000*30);
     }
 
     render(){
@@ -241,7 +326,7 @@ class Root extends Component {
                     ref="idleTimer"
                     activeAction={this._onActive.bind(this)}
                     idleAction={this._onIdle.bind(this)}
-                    timeout={5000}
+                    timeout={1000 * 60}
                     format="MM-DD-YYYY HH:MM:ss.SSS"
                 >
                     <Switch>
