@@ -72,8 +72,9 @@ class App extends Component {
     
     closeWindow() {
         if (confirm('Close the window?')) {
-            window.open('', '_self', ''); //bug fix
-            window.close();
+            // window.open('', '_self', ''); //bug fix
+            // window.close();
+            open(location, '_self').close();
         }
     }
 
