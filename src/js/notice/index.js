@@ -38,7 +38,7 @@ class App extends Component {
                 content: notice.Content,
                 active: idx
             });
-            console.log('notice:', notice);
+            // console.log('notice:', notice);
 
             dispatch( updateNotice(notice) );
         }
@@ -47,7 +47,7 @@ class App extends Component {
 
     getNoticeFromApi(){
         var self = this;
-        console.log('notice.idx', this.props.notice.idx);
+        // console.log('notice.idx', this.props.notice.idx);
         var noticeIdx = this.props.notice.idx ? this.props.notice.idx : 0;
         
         axios({
