@@ -1,0 +1,47 @@
+{
+  "name": "react-tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon ./server/index.js",
+    "start": "webpack-dev-server --hot --host 0.0.0.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "draft-js": "^0.10.0",
+    "echarts": "^3.5.2",
+    "echarts-for-react": "^1.2.0",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "jade": "^1.11.0",
+    "morgan": "^1.8.1",
+    "mysql": "^2.13.0",
+    "react": "^15.5.4",
+    "react-awesome-modal": "^2.0.1",
+    "react-dom": "^15.5.4",
+    "react-html-parser": "^1.0.3",
+    "react-idle-timer": "^1.3.3",
+    "react-redux": "^5.0.4",
+    "react-router": "^4.1.1",
+    "react-router-redux": "^4.0.8",
+    "react-rte": "^0.11.0",
+    "react-websocket": "^1.1.6",
+    "redux": "^3.6.0",
+    "webpack": "^2.3.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "react-router-dom": "^4.1.1",
+    "webpack-dev-server": "^2.4.2"
+  }
+}

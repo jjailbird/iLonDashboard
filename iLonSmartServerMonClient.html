@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>iLonSmartServer Monitoring System</title>
+    <script type="text/javascript">
+        if ('WebSocket' in window) {
+            console.log('#');
+            var oSocket = new WebSocket('ws://192.168.147.34:8181/');
+
+            oSocket.onmessage = function (e) {
+                // console.log(e.data);
+                var jsonObj = JSON.parse(e.data);
+                console.log(jsonObj);
+            };
+
+            oSocket.onopen = function (e) {
+                console.log('open');
+            };
+
+            oSocket.onclose = function (e) {
+                console.log('close');
+            };
+
+           // oSocket.send('message');
+           // oSocket.close();
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

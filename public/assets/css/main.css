@@ -1,0 +1,287 @@
+.wrap{
+
+}
+
+
+.nav-title-color{
+    color: #606380;
+}
+
+.item_wrap {
+    overflow: hidden;
+    font-family: "Myriad Pro Regular";
+    padding-bottom: 39px;
+    margin:0 0 0 20px;
+}
+.item {
+    float: left;
+    margin-bottom: 10px;
+    margin-right:10px;
+    width: 620px;
+    height:480px;
+}
+
+
+.item > .box {
+    background-color: rgba(0, 0, 0, 0.25);
+
+    border-radius: 10px;
+    height: 460px;
+    padding: 10px;
+    color: #fff;
+    position:relative;
+}
+.item:nth-child(3n){
+    margin-right:0;
+}
+
+.item > .box h2{
+    xfont-weight:lighter;
+    font-size: 42px;
+    font-weight:300;
+    margin-bottom: 0;
+    position: absolute;
+    left:22px;
+    top:18px;
+}
+.item > .box h2 div{
+    font-weight:lighter;
+    font-size: 22px;
+}
+
+.item .box .content {
+    position: relative;
+
+}
+
+.item.eletricity .box .content,
+.item.gas .box .content {
+    background: url('/img/main/cordline.png') 34px 91px no-repeat;
+}
+.item.water .box .content {
+    background: url('/img/main/cordline2.png') 0 68px no-repeat;
+}
+
+.item .box .content img.left-icon{
+    position: absolute;
+    left:0;
+}
+.item .box .content .fill{
+    height:0;
+    margin-top:0;
+    overflow: hidden;
+    position: relative;
+}
+.item .box .content .fill img{
+    position: absolute;
+    bottom:0;
+    left:0;
+    width: 100%;
+    height: auto;
+}
+
+.item .box .content .value{
+    font-size:70px;
+    font-weight: bold;
+    margin-left:120px;
+    margin-right:100px;
+    margin-top: 11px;
+    display: block;
+    text-align: center;
+}
+.item .box .content .unit{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size:45px;
+}
+.item .box .more{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+.item .box .more a{
+    display: block;
+    text-decoration: none;
+    color: #b7b9cc;
+    font-weight: normal;
+    font-size:25px;
+    background-color: #595C79;
+    xpadding: 0px 10px;
+    border-radius:14px;
+    height:40px;
+
+    width:110px;
+    text-align: center;
+    line-height:40px;
+}
+.item .box .more .arrow{
+    background-image: url('/img/main/arrow.png');
+    background-size:auto;
+    width: 11px;
+    height: 13px;
+    display:inline-block;
+    margin-left:10px;
+    vertical-align: middle;
+}
+
+/* eletricity */
+.item.eletricity .box .content{
+    margin-left:50px;
+    margin-top:197px;
+    width: 500px;
+    height:124px;
+}
+.item.eletricity .box .content img{
+    width:70px;
+    height:92px;
+    top:50%;
+    margin-top:-64px;
+}
+
+/* gas */
+.item.gas .box .content{
+    margin-left:50px;
+    margin-top:199px;
+    width: 511px;
+    height:125px;
+}
+.item.gas .box .content img{
+    width: 92px;
+    height: 92px;
+    top:50%;
+    margin-top:-64px;
+}
+/* water */
+.item.water .box .content{
+    width:510px;
+    height:125px;
+    margin-top: 198px;
+    margin-left: 50px;
+}
+.item.water .box .content img{
+    top:50%;
+    width: 95px;
+    height: 75px;
+    margin-top:-53px;
+}
+
+/* temperature */
+.item.temperature .box .content {
+    width: 525px;
+    /*height: 255px; */
+    height: 287px;
+    margin-left: 55px;
+    margin-top: 112px;
+    overflow: hidden;
+}
+.item.temperature .box .content > div{
+    float: left;
+    width: 238px;
+    height:100%;
+    position:relative;
+}
+.item.temperature .box .content .indoor{
+    margin-right: 40px;
+}
+.item.temperature .box .content .outdoor{
+    width: 246px;
+}
+.item.temperature .box .content .temp{
+    width: 108px;
+    height:100%;
+    float: left;
+    top:0;
+    background: url('/img/temp/temp_empty.png') center bottom no-repeat;
+}
+.item.temperature .box .content .temp {
+    position: absolute;
+    right:0;
+}
+
+.item.temperature .box .content .indoor > div:first-child{
+    margin-top: 50px;
+    width:104px;
+    text-align: right;
+}
+.item.temperature .box .content .indoor .top{
+    font-size: 40px;
+}
+.item.temperature .box .content .indoor .bottom{
+    font-size: 50px;
+}
+.item.temperature .box .content .indoor .bottom span{
+    font-size: 45px;
+    xmargin-left: 6px;
+}
+
+.item.temperature .box .content .outdoor{
+    float: left;
+    position:relative;
+}
+.item.temperature .box .content .outdoor .temp{
+    xwidth: 90px;
+    top:0;
+    left: 0;
+    right: auto;
+}
+.item.temperature .box .content .outdoor > div:first-child{
+    margin-left: 111px;
+    margin-top: 50px;
+    font-size: 40px;
+}
+.item.temperature .box .content .outdoor .bottom{
+    font-size: 50px;
+}
+.item.temperature .box .content .outdoor .bottom span{
+    font-size: 45px;
+    xmargin-left: 6px;
+}
+
+/* humidity */
+.item.humidity .box .content {
+    float: left;
+    width: 189px;
+    height: 254px;
+    margin-left: 215px;
+    margin-top: 122px;
+    background: url('/img/main/humidity.png') center bottom no-repeat;
+}
+.item.humidity .box .content .fill{
+    xwidth: 211px;
+    xheight: 281px;
+}
+.item.humidity .box .content .valueLabel{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -35px;
+    font-size: 50px;
+    width: 50px;
+    text-align: center;
+}
+.item.humidity .box .content .valueLabel:after{
+    padding-left: 10px;
+    font-weight: normal;
+    content: '%';
+    font-size: 39px;
+    vertical-align: text-top;
+}
+
+/* notice */
+.item.notice .box .content {
+    width: 543px;
+    height: 288px;
+    margin-left: 30px;
+    margin-top: 102px;
+    font-family: Nanum Gothic;
+    overflow-y: auto;
+}
+.item.notice .box .content .title{
+    font-size: 30px;
+    xfont-weight: bold;
+    margin-bottom: 26px;
+}
+.item.notice .box .content .message{
+    font-size:25px;
+}

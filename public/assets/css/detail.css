@@ -1,0 +1,542 @@
+.wrap.detail{
+    width:1920px;
+}
+
+
+
+#detail{
+    padding-bottom: 20px;
+    width: 1920px;
+}
+.wrap.detail{
+    margin-bottom: 51px;
+    position: relative;
+}
+.detail .content {
+    border-radius:10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding:20px;
+    margin-left: 20px;
+    width: 1550px;
+    height:933px;
+}
+.detail .content h3{
+    font-size: 50px;
+}
+
+.detail .content .sub_title{
+    color: #344A91;
+    background-repeat: no-repeat;
+    background-position: 0 9px;
+    padding:0px 0 63px 50px;
+    font-size:50px;
+    font-weight:500;
+}
+.detail .content .sub_title.electricity{
+    background-size:33px 43px;
+    padding-bottom: 45px;
+    background-image: url(/img/detail/small-elecity.png);
+}
+.detail .content .sub_title.gas{
+    background-size:43px 43px;
+    background-image: url(/img/detail/small-gas.png);
+}
+.detail .content .sub_title.water{
+    background-size:43px 43px;
+    background-image: url(/img/detail/small-water.png);
+}
+.detail .content .sub_title.temperature{
+    background-size:43px 43px;
+    background-image: url(/img/detail/small-temperature.png);
+}
+.detail .content .sub_title.humidity{
+    background-size:43px 43px;
+    background-image: url(/img/detail/small-humidity.png);
+}
+.detail .content .sub_title.notice{
+    padding-bottom: 35px;
+    background-size:43px 43px;
+    background-position: 0 3px;
+    background-image: url(/img/detail/small-notice.png);
+}
+
+.detail .sub_cate_title {
+    color:#fff;
+    font-size: 50px;
+}
+
+
+.detail .content .display_gauge{
+    background-color: #fff;
+    padding:20px 0;
+    margin-bottom:20px;
+}
+.detail .content .btn{
+    height: 60px;
+    line-height: 60px;
+    padding: 0;
+    font-size: 32px;
+    border-radius: 10px;
+}
+
+.cates{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom:64px;
+}
+.cates.second{
+    margin-bottom: 42px;
+}
+.cates li{
+    xpadding:10px;
+    flex: 1;
+    margin-left:10px;
+    text-align: center;
+}
+.cates li a{
+    border:1px solid #D5E1F8;
+    background-color:#88A3D8;
+    width:100%;
+    color: #fff;
+    display: block;
+}
+.cates li a.active{
+    background-color:#FFCB41;
+    border-color: #fff;
+}
+
+.cates li:first-child{
+    margin-left: 0;
+}
+
+
+
+.right_menu {
+    position: absolute;
+    right:20px;
+    top:0;
+    width:270px;
+    overflow: hidden;
+}
+.right_menu .menus{
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom:0;
+}
+.right_menu .menus li{
+    margin-top: 10px;
+    color: #fff;
+}
+.right_menu .menus li a.right-btn {
+    text-indent:999%;
+    width: 100%;
+    display: block;
+    background-color: #8192ae;
+    color: #fff;
+    height:130px;
+    text-align: center;
+    text-decoration: none;
+    border-radius:8px;
+    font-size:42px;
+    padding: 0;
+    line-height: 130px;
+    background-repeat: no-repeat;
+    xbackground-position:-50px 20px;
+    background-size: 100% 100%;
+}
+.right_menu .menus li:first-child{
+    margin-top: 0;
+}
+
+.right_menu .menus li a.active{
+    xbackground-color:#F45235;
+}
+
+
+.right_menu .menus li.electricity a{
+    background-image: url(/img/detail/icon-elecity.png);
+}
+.right_menu .menus li.electricity a.active{
+    background-image: url(/img/detail/icon-elecity-active.png);
+}
+
+.right_menu .menus li.gas a{
+    background-image: url(/img/detail/icon-gas.png);
+}
+.right_menu .menus li.gas a.active{
+    background-image: url(/img/detail/icon-gas-active.png);
+}
+
+.right_menu .menus li.water a{
+    background-image: url(/img/detail/icon-water.png);
+}
+.right_menu .menus li.water a.active{
+    background-image: url(/img/detail/icon-water-active.png);
+}
+
+.right_menu .menus li.temperature a{
+    background-image: url(/img/detail/icon-temperature.png);
+}
+.right_menu .menus li.temperature a.active{
+    background-image: url(/img/detail/icon-temperature-active.png);
+}
+
+.right_menu .menus li.humidity a{
+    background-image: url(/img/detail/icon-humidity.png);
+}
+.right_menu .menus li.humidity a.active{
+    background-image: url(/img/detail/icon-humidity-active.png);
+}
+.right_menu .menus li.notice a{
+    background-image: url(/img/detail/icon-notice.png);
+}
+.right_menu .menus li.notice a.active{
+    background-image: url(/img/detail/icon-notice-active.png);
+}
+.right_menu .menus li.main a{
+    background-image: url(/img/detail/icon-main.png);
+}
+
+
+
+.detail_chart_wrap{
+    margin-bottom:84px;
+}
+.temperature .detail_chart_wrap > div{
+    height: 552px;
+}
+
+.eletricity .detail_chart_wrap {
+    margin-bottom: 42px;
+}
+.detail_chart_wrap .flex_1{
+    position: relative;
+    height:600px;
+    xpadding-top:50px;
+    xpadding-bottom:50px;
+}
+.detail_chart_wrap .flex_1 > div {
+
+}
+
+.eletricity .detail_chart_wrap .flex_1{
+    height: 500px;
+}
+
+.detail_chart_wrap > div {
+    background-color:#fff;
+
+    border-radius:8px;
+}
+
+.eletricity .detail_chart_wrap > div,
+.temperature .detail_chart_wrap > div{
+    margin:0 5px;
+}
+
+.detail_chart_wrap.chart_line > div{
+    padding:0 10px;
+}
+
+.detail_chart_wrap > div h4{
+    margin:17px 0 0px 33px;
+    font-weight: normal;
+    font-size:40px;
+    color:#666666;
+}
+
+.detail .btn-time-wrap {
+    text-align: center;
+}
+.detail .btn-time-wrap > button{
+    background-color:#88a3d8;
+    color:#fff;
+    margin:0 5px;
+    width:180px;
+    height:55px;
+    border:none;
+}
+.detail .btn-time-wrap > button.active{
+    background-color:#f45235;
+}
+.detail .btn-time-wrap > button.active:focus{
+    outline-color:#fff !important;
+}
+
+
+
+
+/* detail-index */
+.detail-index{
+    height: 100%;
+    background-position: 0 center;
+    background-repeat: no-repeat;
+    xmax-width:412px;
+    height:100%;
+    margin:0 auto;
+    position:relative;
+}
+.detail-index .value{
+    font-size: 90px;
+    color:#344a91;
+    font-weight: bold;
+    position: relative;
+}
+.detail-index .unit{
+    font-size: 45px;
+    position: absolute;
+    right: 0;
+    bottom:30px;
+    color:#aabce0;
+    vertical-align: sub; /*bottom*/
+}
+
+/* detail-index gas */
+.detail_chart_wrap.gas .line_chart{
+    width: 831px;
+    height: 420px !important;
+    margin:100px auto 0 auto;
+}
+.detail-index.gas{
+    margin-top: 168px;
+    width:846px;
+    height:276px;
+    background-size: 247px 274px;
+    background: url('/img/detail/detail-gas.png') 0 0 no-repeat;
+}
+.detail-index.gas .value_wrap{
+    position:relative;
+    margin-left:326px;
+    width:522px;
+    height:100%;
+}
+.detail-index.gas .value_wrap .value{
+    display: block;
+    padding-top: 97px;
+    margin-right: 100px;
+    overflow: hidden;
+    text-align: center;
+}
+/* detail-index water */
+.detail_chart_wrap.water .line_chart{
+    width: 833px;
+    height: 408px !important;
+    margin:100px auto 0 auto;
+}
+.detail-index.water{
+    margin-top: 190px;
+    width: 856px;
+    height:242px;
+    background-size: 856px 241px;
+    background: url('/img/detail/detail-water.png') 0 0 no-repeat;
+}
+.detail-index.water .value_wrap{
+    margin-left:352px;
+    padding-top: 69px;
+    margin-right: 100px;
+    overflow: hidden;
+    text-align: center;
+}
+
+
+/* temperature */
+.detail_chart_wrap.temperature .bar_chart{
+    margin-left:105px;
+    height: 400px !important;
+    width:530px;
+    margin-top: 108px;
+}
+.temperature .place{
+    color: #fff;
+}
+.detail-index.temperature{
+    margin-top: 135px;
+    width: 355px;
+    height:279px;
+}
+.detail-index.temperature .value_wrap{
+    padding-top: 102px;
+    padding-left: 140px;
+}
+.detail-index.temperature .unit{
+    top:127px;
+}
+.detail-index.temperature .temp{
+    width: 108px;
+    height:287px;
+    position: absolute;
+    top: 50%;
+    margin-top:-131.5px;
+    background: url('/img/temp/temp_empty.png') 0 center no-repeat;
+}
+.detail-index.temperature .temp .fill{
+    overflow: hidden;
+    position:relative;
+    height:0;
+}
+.detail-index.temperature .temp .fill img{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+}
+
+/* humidity */
+.detail_chart_wrap.humidity .bar_chart{
+    height: 400px !important;
+    width: 1200px;
+    margin: 100px auto 0 auto;
+}
+.detail-index.humidity{
+    position:relative;
+    width: 475px;
+    height: 320px;
+
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-top: -160px;
+    margin-left: -215px;
+}
+.detail-index.humidity .humid{
+    background: url('/img/humidity/humidity_empty.png') center bottom no-repeat;
+    width: 253px;
+    height: 320px;
+    position:relative;
+    box-sizing: content-box;
+    float: left;
+}
+.humidity .humid .fill{
+    overflow: hidden;
+    position:relative;
+    height:0;
+}
+.humidity .humid .fill img{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+}
+
+.detail-index.humidity .value_wrap{
+    margin-left:300px;
+    margin-top:148px;
+}
+.detail-index.humidity .value_wrap .value{
+    font-size: 70px;
+}
+.detail-index.humidity .value_wrap .unit{
+    font-size: 45px;
+    top:165px;
+    bottom:auto;
+}
+
+
+
+/* notice */
+.flex_wrap.notice{
+    height:806px;
+    position:relative;
+}
+.flex_wrap.notice .box{
+    background-color: #fff;
+    width:1066px;
+    padding:35px 30px;
+}
+.flex_wrap.notice .box .title{
+    font-size: 40px;
+    color: #344a91;
+    margin-bottom: 40px;
+}
+.flex_wrap.notice .box .info{
+    background-color:#ac9c8d;
+    color:#fff;
+    padding:22px 20px;
+    border-radius:6px;
+    margin-bottom: 40px;
+    font-size: 25px;
+}
+.flex_wrap.notice .box .message_content{
+    color:#666666;
+    font-size: 25px;
+    word-break: break-all;
+    overflow-y: auto;
+    height:660px
+}
+
+.flex_wrap.notice .list{
+    position: absolute;
+    right:0;
+    width:379px;
+    background: none;
+}
+.flex_wrap.notice .list li{
+    margin-top: 10px;
+}
+.flex_wrap.notice .list li:first-child{
+    margin-top: 0;
+}
+.flex_wrap.notice .list li button{
+    padding: 20px 20px;
+    width:100%;
+    background-color:#88a3d8;
+    color:#fff;
+    height: 106px;
+    border: 2px solid #d5e1f8;
+}
+.flex_wrap.notice .list li button span{
+    display: block;
+    text-overflow: ellipsis;
+    xwhite-space: nowrap;
+    line-height:32px;
+    overflow: hidden;
+    height:100%;
+    font-size: 30px;
+    text-align: left;
+}
+
+.flex_wrap.notice .list li button:focus{
+    outline: 0;
+}
+.flex_wrap.notice .list li button.active{
+    background-color:#f8b739;
+    border:2px solid #ffeac2;
+    color:#fff;
+}
+
+
+
+.electricity_power .gauge{
+    width: 830px;
+    height: 500px !important;
+    float: left;
+}
+.electricity_power .sub_data{
+    float: left;
+    margin-top: 124px;
+    font-size: 30px;
+}
+.electricity_power .sub_data li{
+    height:50px;
+    width: 561px;
+    line-height:50px;
+    margin-bottom:20px;
+    border-bottom: 2px solid #959595;
+}
+.electricity_power .sub_data li span.a{
+    padding-left:20px;
+    display:inline-block;
+    width: 308px;
+    background-color:#959595;
+    color: #fff;
+    border-radius: 5px;
+}
+.electricity_power .sub_data li span.b{
+    margin-left:21px;
+    color: #f45235;
+    width: 212px;
+}

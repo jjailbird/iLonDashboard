@@ -1,0 +1,76 @@
+body{
+    padding:0;
+    margin:0;
+    overflow-y: hidden;
+    font-family: arial;
+}
+h1,h2,h3,h4,h5,h6,
+ul, li{
+    margin:0;
+    padding:0;
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+}
+button{
+    outline:0;
+}
+
+#home{
+    background-image: url(/img/main/bg.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+#detail{
+    background-image: url(/img/detail/bg.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.flex_wrap{
+    display: flex;
+}
+.flex_1{
+    flex:1;
+}
+
+
+.navbar_top{
+    padding:30px 0;
+    margin-left:30px;
+}
+.navbar_top .nav_title {
+    color:#60637f;
+    font-size: 35px;
+    font-weight:600;
+}
+.navbar_top .right_info{
+    position: absolute;
+    right:30px;
+    top:30px;
+    font-size:35px;
+    font-weight: 600;
+    color: #60637f;
+}
+.navbar_top .right_info span{
+    margin-left:15px;
+}
+.navbar_top .right_info span:first-child{
+    margin-left: 0;
+}
+.navbar_top .right_info .seperator{
+    font-size: 18px;
+    position:relative;
+    top:-6px;
+}
+
+
+.navbar_top .right_info .temperature span{
+    font-size: 25px;
+}
+.navbar_top .right_info .ampm {
+    font-size: 25px;
+    margin-left:6px !important;
+}
