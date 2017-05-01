@@ -70,13 +70,19 @@ class App extends Component {
 
     }
     
+    closeWindow() {
+        if (confirm('Close the window?')) {
+            // window.open('', '_self', ''); //bug fix
+            window.close();
+        }
+    }
 
     render(){
         let {notices, active} = this.state;
 
         return(
             <div>
-                <h2 className="sub_title notice">Notice</h2>
+                <h2 className="sub_title notice" onClick={this.closeWindow.bind(this)}>Notice</h2>
                 {/*<button className="btn" onClick={this.openModal.bind(this, true)}>open</button>*/}
 
                 <div className="flex_wrap detail_chart_wrap notice">
