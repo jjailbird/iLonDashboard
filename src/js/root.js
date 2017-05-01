@@ -313,7 +313,7 @@ class Root extends Component {
                 idx: idx
             })
 
-        }, 1000*30);
+        }, 30000);
     }
 
     render(){
@@ -326,7 +326,7 @@ class Root extends Component {
                     ref="idleTimer"
                     activeAction={this._onActive.bind(this)}
                     idleAction={this._onIdle.bind(this)}
-                    timeout={1000 * 60}
+                    timeout={60000}
                     format="MM-DD-YYYY HH:MM:ss.SSS"
                 >
                     <Switch>

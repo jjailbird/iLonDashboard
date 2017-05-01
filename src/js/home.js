@@ -21,12 +21,10 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        
-        if(!props.notice.Id){
+        if(!props.notice.Id) {
             this.getNoticeFromApi();
-        }
+        };
 
-        this.hostname = window.location.hostname;
     }
 
     componentDidMount() {
@@ -43,10 +41,11 @@ class App extends Component {
         // timer = setInterval(function(){
         //
         // }, 5000);
-
+        var hostname = window.location.hostname;
+        // console.log('hostname', hostname);
         axios({
             method:'get',
-            url:`http://${this.hostname}:8080/api/notices/0/1`,
+            url:`http://${hostname}:8080/api/notices/0/1`,
             responseType:'json'
         })
         .then(function(response) {
