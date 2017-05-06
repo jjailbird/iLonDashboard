@@ -9,7 +9,7 @@ import {
 const Temperature = (type, input) => {
 
     const inputMax = 100;
-    const heightFull = 283;
+    const heightFull = 287;
     const heightPercent = (input / inputMax) * 100;
     const heightPx = Math.round((heightFull * heightPercent) / 100);
 

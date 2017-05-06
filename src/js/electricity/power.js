@@ -42,7 +42,7 @@ class App extends Component {
                    max:800,
                    name:'',
                    type:'gauge',
-                   detail : {formatter:'{value}A'},
+                   detail : {formatter:`${value.toFixed(2)}KW`},
                    data:[{value: value, name: ''}],
                }
            ]
@@ -58,7 +58,13 @@ class App extends Component {
     }
 
     gaugeChart(){
-        let {power} = this.props
+        let {power} = this.props;
+        let leadlag = "";
+        if (power.power_fator_avg == 1)
+            leadlag = "lead";
+        if (power.power_fator_avg == -1)
+            leadlag = "lag";
+        
         return(
             <div className="flex_wrap detail_chart_wrap">
                 <div className="flex_1">
@@ -66,15 +72,15 @@ class App extends Component {
                     <ul className="sub_data">
                         <li>
                             <span className="a">Frequency</span>
-                            <span className="b">{power.frequency}</span>
+                            <span className="b">{power.frequency.toFixed(1)} HZ</span>
                         </li>
                         <li>
                             <span className="a">Power Fator Avg</span>
-                            <span className="b">{power.power_fator_avg}</span>
+                            <span className="b">{power.power_fator_avg.toFixed(2)} {leadlag}</span>
                         </li>
                         <li>
                             <span className="a">Peak Demand</span>
-                            <span className="b">{power.peak_damand}</span>
+                            <span className="b">{parseInt(power.peak_damand)} KW</span>
                         </li>
                         <li>
                             <span className="a">Time of Peak Demand</span>

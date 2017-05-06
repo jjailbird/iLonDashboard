@@ -60,8 +60,8 @@ class App extends Component {
         var hours = date.getHours();
         var minutes = date.getMinutes();
         var ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : "00"; // the hour '0' should be '12'
+        //hours = hours % 12;
+        //hours = hours ? hours : "00"; // the hour '0' should be '12'
         minutes = minutes < 10 ? '0'+minutes : minutes;
 
         this.setState({
@@ -86,7 +86,7 @@ class App extends Component {
 
         return(
             <nav className="navbar_top navbar-light">
-                <h1 className="nav_title" style={{"color":color}}>Middle & High School</h1>
+                <h1 className="nav_title" style={{"color":color}}>Daegu Middle High School</h1>
 
                 <div className="right_info">
                     <span className="temperature" style={{"color":color}}>

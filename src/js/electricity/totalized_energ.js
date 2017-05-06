@@ -7,6 +7,10 @@ import {
 
 import { connect } from 'react-redux';
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 class App extends Component {
 
     constructor(props) {
@@ -150,7 +154,7 @@ class App extends Component {
                                    max:120,
                                    name:'',
                                    type:'gauge',
-                                   detail : {formatter:'{value}HZ'},
+                                   detail : {formatter:'{value} HZ'},
                                    data:[{value: totalized_energ, name: ''}],
                                }
                            ]
@@ -165,25 +169,32 @@ class App extends Component {
 
     render(){
         let {time} = this.state;
-
+        let {totalized_energ} = this.props;
         let renderChart = "";
-
+        /*
         if(time == 'currently'){
             renderChart = this.gaugeChart();
         }else{
             renderChart = this.lineChart();
         }
+        */
 
         return (
-            <div>
-                {renderChart}
-                <div className="text-center btn-time-wrap">
-                    <button type="button" className={"btn" + (time=='currently'?' active':'')} onClick={this.changeTime.bind(this, 'currently')}>Currently</button>
-                    <button type="button" className={"btn" + (time=='week'?' active':'')} onClick={this.changeTime.bind(this, 'week')}>Week</button>
-                    <button type="button" className={"btn" + (time=='month'?' active':'')} onClick={this.changeTime.bind(this, 'month')}>Month</button>
-                    <button type="button" className={"btn" + (time=='year'?' active':'')} onClick={this.changeTime.bind(this, 'year')}>Year</button>
+            
+            <div className="flex_wrap detail_chart_wrap totalized">
+                <div className="flex_1">
+                    
+
+                    <div className="detail-index totalized">
+                        <div className="value_wrap">
+                            <span className="value">{numberWithCommas(totalized_energ)}</span>
+                            <span className="unit">KWH</span>
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
+            
         );
     }
 }

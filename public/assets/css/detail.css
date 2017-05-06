@@ -543,3 +543,24 @@
 .electricity_power .sub_data li span.b.time_of_peak_demand {
     font-size: 22px;
 }
+
+
+
+.detail_chart_wrap.totalized .flex_1{
+    background:#fff url('/img/detail/total_energ_current_bg.png') 0 bottom no-repeat;
+}
+
+.detail_chart_wrap.totalized .detail-index{
+    background: url('/img/detail/long-eletricity.png') no-repeat;
+    width: 734px;
+    height:248px;
+    margin: 126px auto 0 auto;
+}
+
+.detail_chart_wrap.totalized .detail-index .value{
+    display: block;
+    padding-top: 97px;
+    margin-right: -10px;
+    overflow: hidden;
+    text-align: center;
+}

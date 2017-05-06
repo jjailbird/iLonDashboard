@@ -45,7 +45,7 @@ class App extends Component {
                    max:800,
                    name:'',
                    type:'gauge',
-                   detail : {formatter:'{value}A'},
+                   detail : {formatter:`${parseInt(value)}V`},
                    data:[{value: value, name: ''}],
                }
            ]

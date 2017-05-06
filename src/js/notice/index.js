@@ -9,7 +9,6 @@ import {
 import axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
 
-
 class App extends Component {
     constructor(props) {
         super(props);
@@ -44,7 +43,6 @@ class App extends Component {
         }
 
     }
-
     getNoticeFromApi(){
         var self = this;
         // console.log('notice.idx', this.props.notice.idx);
@@ -71,10 +69,35 @@ class App extends Component {
     }
     
     closeWindow() {
+        var ws = new WebSocket(`ws://${this.hostname}:8181/`);
+        this.send = function (message, callback) {
+            this.waitForConnection(function () {
+                ws.send(message);
+                ws.close();
+                if (typeof callback !== 'undefined') {
+                    callback();
+                }
+            }, 1000);
+        };
+
+        this.waitForConnection = function (callback, interval) {
+            if (ws.readyState === 1) {
+                callback();
+            } else {
+                var that = this;
+                // optional: implement backoff for interval here
+                setTimeout(function () {
+                    that.waitForConnection(callback, interval);
+                }, interval);
+            }
+        };
+        
         if (confirm('Close the window?')) {
             // window.open('', '_self', ''); //bug fix
             // window.close();
-            open(location, '_self').close();
+            // open(location, '_self').close();
+            // alert(`ws://${this.hostname}:8181/`);
+           this.send('kill-chrome');
         }
     }
 
@@ -83,7 +106,7 @@ class App extends Component {
 
         return(
             <div>
-                <h2 className="sub_title notice">Notice</h2>
+                <h2 className="sub_title notice" onClick={this.closeWindow.bind(this)}>Notice</h2>
                 {/*<button className="btn" onClick={this.openModal.bind(this, true)}>open</button>*/}
 
                 <div className="flex_wrap detail_chart_wrap notice">
