@@ -564,3 +564,9 @@
     overflow: hidden;
     text-align: center;
 }
+
+.detail_chart_wrap.power .line_chart {
+    width:831px;
+    height:420px !important;
+    margin:50px auto 0 auto;
+}

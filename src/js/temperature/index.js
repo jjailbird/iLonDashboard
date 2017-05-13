@@ -6,6 +6,9 @@ import {
   withRouter
 } from 'react-router-dom';
 
+import { addDays, getDateStringOnly } from '../utils/dateFunctions.js';
+import { getDialogApiUrl } from '../utils/getConstants.js';
+
 const Temperature = (type, input) => {
 
     const inputMax = 100;
@@ -36,73 +39,238 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
-            time : props.time
+            time : props.time,
+            loading1: true,
+            loading2: true,
+            option1: {},
+            option2: {},
         };
+        this.hostname = window.location.hostname;
     }
 
     changeTime(time){
 
-        this.setState({
-            time : time
-        });
-    }
+        let today = new Date();
 
-    getOptions(){
-        let {time} = this.state;
-        var xAxisData = [];
-        var seriesData1 = [];
-        var seriesData2 = [];
+        const sApiUrlBase = getDialogApiUrl();
+        // const sApiUrlBase = `http://${this.hostname}:8080/api/datalogs/`;
+        // const sApiUrlBase = `http://${this.hostname}:50993/api/datalogs/`;
+        // const sApiUrlBase = `http://192.168.147.34:8080/api/datalogs/`;  
+        let sApiUrl = "";
+        let seriesData = [];
 
-        switch (time) {
-            case "week":
-                xAxisData =['SUN','MON','TUE','WED','THU','FRI','SAT'];
-                seriesData1 = Array.from(new Array(7), () => Math.round(Math.random() * 1000));
-                seriesData2 = Array.from(new Array(7), () => Math.round(Math.random() * 1000));
-                break;
-            case "month":
-                xAxisData = Array.from(new Array(30), (x,i) => i); //[1,2,3,4];
-                seriesData1 = Array.from(new Array(30), () => Math.round(Math.random() * 1000));
-                seriesData2 = Array.from(new Array(30), () => Math.round(Math.random() * 1000));
-                break;
+        if (time == 'week') {
+            const weekday = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+            const weekToday = today.getDay();
+            var weekDate = new Array(7);
+            var weekDateString = new Array(7);
 
-            case "year":
-                xAxisData = Array.from(new Array(12), (x,i) => i);
-                seriesData1 = Array.from(new Array(12), () => Math.round(Math.random() * 1000));
-                seriesData2 = Array.from(new Array(12), () => Math.round(Math.random() * 1000));
-                break;
+            weekDate[0] = addDays(today, -weekToday);
+            var n = weekday[weekToday];
+            for(let i = 0;i < 7; i++) {
+                weekDate[i] = addDays(weekDate[0], i);
+                weekDateString[i] = getDateStringOnly(weekDate[i].toDateString()); // + 'T00:00:00'; 
+            }
+
+            sApiUrl = sApiUrlBase + "GetAvgGroupByTargetDate/temp.indoor.fixed(1)/" + weekDateString[0] + "/" + weekDateString[6];
+            this.setOption(1, time, sApiUrl, weekday, weekDateString); 
+          
+            sApiUrl = sApiUrlBase + "GetAvgGroupByTargetDate/temp.outdoor.fixed(1)/" + weekDateString[0] + "/" + weekDateString[6];
+            this.setOption(2, time, sApiUrl, weekday, weekDateString); 
+            
+        }
+        
+        else if(time == 'month') {
+            const yearToday = today.getFullYear();
+            let years = [];
+             
+            for (let i = 2; i >= 0; i-- ) {
+                years.push(yearToday - i);
+            }
+            const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+            
+            sApiUrl = sApiUrlBase + "GetAvgGroupByTargetMonth/temp.indoor.fixed(1)/" + years[0] + "/" + years[years.length -1];
+            this.setOption(1, time, sApiUrl, months, years); 
+
+            sApiUrl = sApiUrlBase + "GetAvgGroupByTargetMonth/temp.outdoor.fixed(1)/" + years[0] + "/" + years[years.length -1];
+            this.setOption(2, time, sApiUrl, months, years); 
+
+        } 
+
+        else if (time == 'year') {
+            sApiUrl = sApiUrlBase + "GetAvgGroupByTargetYear/temp.indoor.fixed(1)/";
+            this.setOption(1, time, sApiUrl);
+            
+            sApiUrl = sApiUrlBase + "GetAvgGroupByTargetYear/temp.outdoor.fixed(1)/";
+            this.setOption(2, time, sApiUrl);
+
         }
 
+        this.setState({
+            time : time,
+            loading1: true,
+            loading2: true,
+            loading3: true,
+            option1: this.getOption(),
+            option2: this.getOption(),
+        });
 
+    }
+    getOption() {
+        let xAxisDataBase = {
+            type : 'category',
+            // boundaryGap : false,
+            data : null
+        };
 
-        return {
+        let seriesDataBase = {
+            name:'Phase',
+            type:'bar',
+            // stack: 'stack',
+            data: null,
+        };
+
+        const option = {
             legend: {
-                data:['2016','2017']
+                data:[]
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                }
             },
             calculable : true,
-            xAxis : [
+            xAxis : [ xAxisDataBase ],
+            yAxis : [
                {
-                   type : 'category',
-                   //boundaryGap : false,
-                   data : xAxisData
+                   type : 'value'
                }
             ],
-            yAxis : [{type : 'value'}],
-            series : [
-               {
-                   name:'2016',
-                   type:'bar',
-                   data: seriesData1
-               },
-               {
-                    name:'2017',
-                    type:'bar',
-                    data: seriesData2
-                }
-           ]
-       };
+            series : [ seriesDataBase ]
+        };
+
+        return option;
     }
+    getSeriesData(time,json,dataRange) {
+        let seriesData;
+        if (time == 'week') {
+            seriesData = new Array(7);
+            let tmpData = {};
+            for(let i=0;i<7; i++) {
+                tmpData = json.Data.find(x => x.Date == dataRange[i] + 'T00:00:00');
+                if (tmpData)
+                    seriesData[i] = tmpData.Average;//.toFixed(0);
+                
+            }
+ 
+        }
+        else if (time == 'month') {
+            seriesData = new Array(12);
+            let tempData = {};
+            let tmpData = {};
+            // console.log('dateRange', dataRange);
+            for(let i=0;i<12; i++) {
+                tmpData = json.Data.find(x => (x.Month == i+1 && x.Year == dataRange));
+                // console.log(json.Data, tempData);
+                if (tmpData)
+                    seriesData[i] = tmpData.Average;//.toFixed(0);
+                
+            }
+            
+
+        }
+        // console.log('seriesData', seriesData);
+        return seriesData;
+    }
+    setOption(no, time, sApiUrl, xRange, dataRange) {
+        
+        fetch(sApiUrl)
+        .then((response) => {
+            return response.json() 
+        })   
+        .then((json) => {
+            let chartOption = this.getOption();
+
+            if (time == 'year')
+                xRange = json.Data.map(x => x.Year);
+            
+            chartOption.xAxis[0].data = xRange;
+
+            if (time == 'month' && dataRange) {
+                let yearsrc = json.Data.map(x => x.Year);
+                let years = [...new Set(yearsrc)];
+                // console.log('years rc', yearsrc);
+                // console.log('years', years);
+                
+                for(let i = 0; i<years.length; i++) {
+                    chartOption.legend.data.push(years[i].toString());
+                }
+
+                for(let i = 0;i < dataRange.length;i++) {
+                    if (i == 0) {
+                        chartOption.series[0].name = dataRange[i].toString();
+                        chartOption.series[0].data = this.getSeriesData(time, json, dataRange[i]);
+                    }
+                    else {
+                        let seriesDataBase = {
+                            name:'Phase',
+                            type:'bar',
+                            // stack: 'stack',
+                            data: null,
+                        };
+
+                        seriesDataBase.name = dataRange[i].toString();
+                        seriesDataBase.data = this.getSeriesData(time, json, dataRange[i]);
+                        chartOption.series.push(seriesDataBase);
+                    }
+                }
+                // console.log(no.toString() + '.' + time + ':', chartOption);
+            
+            } 
+            else if (time == 'year') {
+                // let years = json.Data.map(x => x.Year);
+                chartOption.series[0].data = json.Data.map(x => x.Average);
+            }
+            else {
+                chartOption.series[0].data = this.getSeriesData(time, json, dataRange);
+            }
+
+            // console.log(no.toString() + '.' + time + ':', chartOption.series[0].data);
+            // console.log(no.toString() + '.' + time + ':', chartOption);
+            this.setOptionState(no, chartOption);
+        })
+        .catch((error) => {
+            let chartError = this.getOption();
+            chartError.title = { text: error, x: 'center', y: 'center' };
+    
+            this.setOptionState(no, chartError);
+            console.log(no.toString() + '.' + time + ':error:', error);
+        });
+    }
+    setOptionState(no, chartOption) {
+        switch(no) {
+            case 1:
+                this.setState({
+                    loading1: false,
+                    option1: chartOption
+                });
+                break;
+            case 2:
+                this.setState({
+                    loading2: false,
+                    option2: chartOption
+                });
+                break;                
+            case 3:
+                this.setState({
+                    loading3: false,
+                    option3: chartOption
+                });
+                break;
+        }        
+    }
+
 
     render(){
         var {match, temperature} = this.props;
@@ -137,17 +305,19 @@ class App extends Component {
                        <div className="flex_1">
                            <ReactEcharts
                                 className="bar_chart"
-                               option={this.getOptions()}
-                               notMerge={true}
-                               lazyUpdate={true}
+                                option={this.state.option1}
+                                showLoading={this.state.loading1}
+                                notMerge={true}
+                                lazyUpdate={true}
                            />
                        </div>
                        <div className="flex_1">
                            <ReactEcharts
                                 className="bar_chart"
-                               option={this.getOptions()}
-                               notMerge={true}
-                               lazyUpdate={true}
+                                option={this.state.option2}
+                                showLoading={this.state.loading2}
+                                notMerge={true}
+                                lazyUpdate={true}
                            />
                        </div>
                    </div>
